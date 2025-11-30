@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+  <title> omar's website </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="logo"> <img src="assets/logo.png" alt="logo"> </div>
+      <nav class="nav-links">
+        <a href="#hero"> Home</a>
+        <a href="#about"> About</a>
+        <a href="#projects"> Projects</a>
+        <a href="#hobbies"> Hobbies</a>
+        <a href="#contact"> Contact</a>
+      </nav>
+      <a class="btn btn-ghost" href="#message-me"> Message Me</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"> Hello, I'm Omar </p>
+          <h1> I am a physicist and a software enthusiast </h1>
+          <p class="lead"> I am a physicist and a software enthusiast </p>
+          <div class="hero-cta">
+            <a class="btn" href="#contact"> Contact Me</a>
+            <a class="btn" href="#projects"> View Projects</a>
+          </div>
+          <div class="meta">
+            <span> 300+ Hours of Coding</span>
+            <span> 10+ Projects</span>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img src="assets/car.jpg" alt="car">
+          <div class="stat-card">
+            <p>26 years old</p>
+            <p>70kg weight</p>
+            <strong> 1.75m tall</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow"> About Me</p>
+          <h2> Who I am </h2>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow"> My Projects</p>
+          <h2> What I have worked on </h2>
+        </div>
+        <div class="grids cards-2">
+          <article class="card">
+            <h3> Project 1</h3>
+            <span> I love project 1 and I am a project 1 enthusiast </span>
+          </article>
+          <article class="card">
+            <h3> Project 2</h3>
+            <span> I love project 2 and I am a project 2 enthusiast </span>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="hobbies">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow"> My Hobbies</p>
+          <h2> What I do for fun </h2>
+        </div>
+        <div class="grids cards-3">
+        <article class="card">
+          <h3> Coding</h3>
+          <p> I love coding and I am a software enthusiast </p>
+        </article>
+        <article class="card">
+          <h3> Poetry</h3>
+          <p> I love poetry and I am a poet </p>
+        </article>
+        <article class="card">
+          <h3> Sports</h3>
+          <p> I love sports and I am a sports enthusiast </p>
+        </article>
+      </div>
+    </div>
+    </section>
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow"> Contact Me</p>
+          <h2> Get in touch </h2>
+        </div>
+        <div class="contact-form">
+          <form action="">
+            <div class="form-group">
+              <label for="name"> Name</label>
+              <input type="text" id="name" name="name" placeholder="Your Name">
+            </div>
+            <div class="form-group">
+              <label for="message"> Message</label>
+              <textarea id="message" name="message" placeholder="Your Message"></textarea>
+            </div>
+            <button type="submit" class="btn"> Send Message</button>
+          </form>
+        </div>
+        <div class="contact-info">
+          <div class="contact-item">
+            <h3> Email</h3>
+            <p> omar@gmail.com</p>
+          </div>
+          <div class="contact-item">
+            <h3> Phone</h3>
+            <p> +1234567890</p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p> &copy; <span id="year"></span> Omar. All rights reserved. </p>
+      <nav class="footer-nav">
+        <a href="#hero"> Home</a>
+        <a href="#hobbies"> Hobbies</a>
+        <a href="#contact"> Contact</a>
+        <a href="#projects"> Projects</a>
+        <a href="#about"> About</a>
+      </nav>
+      <div class="social-links">
+        <a href="https://github.com/3omaru"> GitHub</a>
+    </div>
+  </footer>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

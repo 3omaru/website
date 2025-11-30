@@ -1,0 +1,648 @@
+/* ============================================
+   CSS LEARNING GUIDE - Personal Website Styles
+   ============================================
+   
+   This CSS file is structured to help you learn:
+   1. CSS Variables (Custom Properties)
+   2. CSS Reset & Base Styles
+   3. Layout (Flexbox & Grid)
+   4. Typography
+   5. Components (Buttons, Cards, Forms)
+   6. Responsive Design (Media Queries)
+   7. Transitions & Animations
+   
+   Read through each section and experiment with values!
+   ============================================ */
+
+/* ============================================
+   PART 1: CSS VARIABLES (Custom Properties)
+   ============================================
+   
+   CSS Variables allow you to store values that can be reused throughout
+   your stylesheet. They're defined with -- and accessed with var().
+   This makes it easy to change colors/spacing globally!
+   
+   :root is a pseudo-class that represents the <html> element,
+   making these variables available everywhere.
+   ============================================ */
+:root {
+  /* Color Palette - Define your brand colors once */
+  --color-primary: #6366f1;        /* Indigo - main brand color */
+  --color-primary-dark: #4f46e5;   /* Darker shade for hover states */
+  --color-secondary: #8b5cf6;      /* Purple - accent color */
+  --color-text: #1f2937;           /* Dark gray - main text */
+  --color-text-light: #6b7280;     /* Medium gray - secondary text */
+  --color-bg: #ffffff;             /* White - background */
+  --color-bg-light: #f9fafb;       /* Light gray - section backgrounds */
+  --color-border: #e5e7eb;         /* Light gray - borders */
+  
+  /* Spacing Scale - Consistent spacing throughout */
+  --spacing-xs: 0.5rem;    /* 8px */
+  --spacing-sm: 1rem;      /* 16px */
+  --spacing-md: 1.5rem;    /* 24px */
+  --spacing-lg: 2rem;      /* 32px */
+  --spacing-xl: 3rem;      /* 48px */
+  --spacing-2xl: 4rem;     /* 64px */
+  
+  /* Typography */
+  --font-family: 'Poppins', sans-serif;
+  --font-size-base: 1rem;          /* 16px - base font size */
+  --font-size-sm: 0.875rem;         /* 14px */
+  --font-size-lg: 1.125rem;         /* 18px */
+  --font-size-xl: 1.25rem;          /* 20px */
+  --font-size-2xl: 1.5rem;          /* 24px */
+  --font-size-3xl: 2rem;            /* 32px */
+  --font-size-4xl: 2.5rem;          /* 40px */
+  
+  /* Border Radius - Rounded corners */
+  --radius-sm: 0.375rem;   /* 6px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+  
+  /* Shadows - Depth and elevation */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions - Smooth animations */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+}
+
+/* ============================================
+   PART 2: CSS RESET & BASE STYLES
+   ============================================
+   
+   Resets remove default browser styling so you have a clean slate.
+   Base styles set defaults for common elements.
+   ============================================ */
+
+/* Universal Box Sizing - Makes width calculations predictable */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;  /* Padding and border included in width/height */
+}
+
+/* Remove default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Base HTML and Body styles */
+html {
+  scroll-behavior: smooth;  /* Smooth scrolling when clicking anchor links */
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: 1.6;                    /* Line spacing for readability */
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;  /* Better text rendering on Mac */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography - Headings get progressively larger */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;                     /* Semi-bold */
+  line-height: 1.2;                     /* Tighter line height for headings */
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;                     /* Bold */
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+}
+
+/* Links - Remove default underline, add custom styling */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);  /* Smooth color change on hover */
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* Images - Responsive by default */
+img {
+  max-width: 100%;    /* Never wider than container */
+  height: auto;       /* Maintain aspect ratio */
+  display: block;     /* Remove inline spacing */
+}
+
+/* ============================================
+   PART 3: LAYOUT UTILITIES
+   ============================================
+   
+   Container class - Centers content and sets max-width
+   This is a common pattern in web design.
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: 1200px;                    /* Maximum width on large screens */
+  margin: 0 auto;                       /* Center horizontally */
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+/* ============================================
+   PART 4: HEADER & NAVIGATION
+   ============================================
+   
+   Flexbox is used here for horizontal layout.
+   display: flex makes children arrange horizontally (or vertically with flex-direction).
+   ============================================ */
+.site-header {
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;                     /* Stays at top when scrolling */
+  top: 0;
+  z-index: 100;                         /* Above other content */
+  padding: var(--spacing-sm) 0;
+}
+
+.header-content {
+  display: flex;                        /* Flexbox layout */
+  align-items: center;                  /* Vertically center items */
+  justify-content: space-between;       /* Space between logo and nav */
+  gap: var(--spacing-lg);               /* Space between flex items */
+}
+
+/* Logo styling */
+.logo img {
+  height: 40px;                         /* Fixed height */
+  width: auto;                          /* Auto width to maintain ratio */
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;                        /* Horizontal list */
+  gap: var(--spacing-lg);               /* Space between links */
+  list-style: none;                     /* Remove bullets (if using <ul>) */
+}
+
+.nav-links a {
+  color: var(--color-text);
+  font-weight: 500;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.nav-links a:hover {
+  background-color: var(--color-bg-light);
+  color: var(--color-primary);
+}
+
+/* ============================================
+   PART 5: BUTTONS
+   ============================================
+   
+   Buttons are reusable components. We use classes to create variants.
+   ============================================ */
+.btn {
+  display: inline-block;                /* Allows padding and width */
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  cursor: pointer;                      /* Pointer cursor on hover */
+  transition: all var(--transition-base);  /* Smooth all property changes */
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);          /* Slight lift effect */
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translateY(0);             /* Press down effect */
+}
+
+/* Ghost button variant - transparent background */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* ============================================
+   PART 6: HERO SECTION
+   ============================================
+   
+   CSS Grid is used for two-column layout.
+   Grid is powerful for complex layouts!
+   ============================================ */
+.hero {
+  padding: var(--spacing-2xl) 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  min-height: 80vh;                     /* Minimum height of viewport */
+  display: flex;
+  align-items: center;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;       /* Two equal columns */
+  gap: var(--spacing-2xl);              /* Space between columns */
+  align-items: center;
+}
+
+.hero-copy h1 {
+  color: white;
+  margin-bottom: var(--spacing-md);
+}
+
+.eyebrow {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;                /* Spacing between letters */
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--spacing-sm);
+}
+
+.lead {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.meta {
+  display: flex;
+  gap: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.meta span {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+}
+
+.hero-media {
+  position: relative;
+}
+
+.hero-media img {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-card {
+  position: absolute;                    /* Positioned relative to .hero-media */
+  bottom: -20px;
+  right: -20px;
+  background-color: white;
+  color: var(--color-text);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-card p {
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+}
+
+.stat-card strong {
+  color: var(--color-primary);
+  font-size: var(--font-size-base);
+}
+
+/* ============================================
+   PART 7: SECTIONS
+   ============================================
+   
+   Reusable section styling with alternating backgrounds
+   ============================================ */
+.section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.section:nth-child(even) {
+  background-color: var(--color-bg-light);  /* Alternate background */
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.section-heading .eyebrow {
+  color: var(--color-primary);
+}
+
+.section-heading h2 {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ============================================
+   PART 8: GRID LAYOUTS
+   ============================================
+   
+   CSS Grid for card layouts. Different grid configurations
+   for different numbers of columns.
+   ============================================ */
+.grids {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.cards-3 {
+  grid-template-columns: repeat(3, 1fr);  /* 3 equal columns */
+}
+
+.cards-2 {
+  grid-template-columns: repeat(2, 1fr);   /* 2 equal columns */
+}
+
+/* ============================================
+   PART 9: CARDS
+   ============================================
+   
+   Cards are common UI components. They use padding, borders,
+   and shadows to create depth.
+   ============================================ */
+.card {
+  background-color: var(--color-bg);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  transform: translateY(-4px);          /* Lift on hover */
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+}
+
+.card h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card p,
+.card span {
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+/* ============================================
+   PART 10: CONTACT FORM
+   ============================================
+   
+   Form styling with proper spacing and focus states
+   ============================================ */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto var(--spacing-2xl);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+  display: block;                        /* Label on its own line */
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;                           /* Full width of container */
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;                         /* Remove default browser outline */
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);  /* Focus ring */
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-item {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background-color: var(--color-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.contact-item h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.contact-item p {
+  color: var(--color-text-light);
+}
+
+/* ============================================
+   PART 11: FOOTER
+   ============================================
+   
+   Footer with flexbox for layout
+   ============================================ */
+.site-footer {
+  background-color: var(--color-text);
+  color: white;
+  padding: var(--spacing-xl) 0;
+  margin-top: var(--spacing-2xl);
+}
+
+.site-footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  text-align: center;
+}
+
+.footer-nav {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;                       /* Wrap to new line if needed */
+  justify-content: center;
+}
+
+.footer-nav a {
+  color: rgba(255, 255, 255, 0.8);
+  transition: color var(--transition-fast);
+}
+
+.footer-nav a:hover {
+  color: white;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.social-links a {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.social-links a:hover {
+  color: white;
+}
+
+/* ============================================
+   PART 12: RESPONSIVE DESIGN (Media Queries)
+   ============================================
+   
+   Media queries let you change styles based on screen size.
+   This is called "responsive design" - making sites work on all devices.
+   
+   @media (max-width: X) means "when screen is X or smaller"
+   ============================================ */
+
+/* Tablet and below (768px and smaller) */
+@media (max-width: 768px) {
+  /* Adjust hero grid to single column */
+  .hero-grid {
+    grid-template-columns: 1fr;         /* Stack columns vertically */
+    gap: var(--spacing-lg);
+  }
+  
+  /* Stack header content vertically on mobile */
+  .header-content {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  /* Make navigation wrap */
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Change card grids to single column */
+  .cards-3,
+  .cards-2 {
+    grid-template-columns: 1fr;         /* One column on mobile */
+  }
+  
+  /* Adjust hero padding */
+  .hero {
+    padding: var(--spacing-xl) 0;
+    min-height: auto;
+  }
+  
+  /* Smaller heading on mobile */
+  h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  /* Stack CTA buttons */
+  .hero-cta {
+    flex-direction: column;
+  }
+  
+  /* Adjust stat card position */
+  .stat-card {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: var(--spacing-md);
+  }
+}
+
+/* Mobile (480px and smaller) */
+@media (max-width: 480px) {
+  /* Even smaller spacing on very small screens */
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  /* Smaller container padding */
+  .container {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+  
+  /* Smaller headings */
+  h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* ============================================
+   LEARNING TIPS:
+   ============================================
+   
+   1. Try changing CSS variable values and see what happens!
+   2. Experiment with different flexbox/grid properties
+   3. Modify colors, spacing, and sizes
+   4. Add new styles for elements
+   5. Use browser DevTools (F12) to inspect and modify styles live
+   6. Comment out properties to see their effect
+   
+   Key Concepts Used:
+   - CSS Variables (--variable-name)
+   - Flexbox (display: flex)
+   - CSS Grid (display: grid)
+   - Media Queries (@media)
+   - Transitions (transition property)
+   - Pseudo-classes (:hover, :focus)
+   - Box Model (padding, margin, border)
+   - Positioning (relative, absolute, sticky)
+   ============================================ */
+
